@@ -615,3 +615,10 @@ body {
     font-size: 16px;
   }
 }
+.msg-time {
+    display: block;
+    font-size: 0.7rem;
+    color: #ccc;
+    text-align: right;
+    margin-top: 4px;
+}

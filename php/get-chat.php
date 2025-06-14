@@ -30,12 +30,13 @@ if (isset($_SESSION['unique_id'])) {
             while ($row = mysqli_fetch_assoc($query)) {
                 $decrypted = decryptMessage($row['msg'], $key);
                 $msgText = $decrypted !== false ? htmlspecialchars($decrypted) : "[Decryption error]";
+                $msgTime = date("g:i A", strtotime($row['sent_at'])); // Format as 3:45 PM
 
                 if ($row['outgoing_msg_id'] == $outgoing_id) {
                     // Outgoing message
                     $output .= '<div class="chat outgoing">
                                     <div class="details">
-                                        <p>' . $msgText . '</p>
+                                        <p>' . $msgText . '<br><small class="msg-time">' . $msgTime . '</small></p>
                                     </div>
                                 </div>';
                 } else {
@@ -43,7 +44,7 @@ if (isset($_SESSION['unique_id'])) {
                     $output .= '<div class="chat incoming">
                                     <img src="php/images/' . $row['img'] . '" alt="">
                                     <div class="details">
-                                        <p>' . $msgText . '</p>
+                                        <p>' . $msgText . '<br><small class="msg-time">' . $msgTime . '</small></p>
                                     </div>
                                 </div>';
                 }
